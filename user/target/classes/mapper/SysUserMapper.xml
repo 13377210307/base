@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.user.mapper.UserMapper">
+
+    <resultMap id="usermap" type="com.model.entity.SysUser">
+        <result column="id" property="id"></result>
+        <result column="username" property="username"></result>
+        <result column="password" property="password"></result>
+        <collection property="roles" javaType="java.util.List" ofType="com.model.entity.SysRole">
+            <result column="key" property="key"></result>
+        </collection>
+    </resultMap>
+
+    <resultMap id="userInfo" type="com.user.vo.UserInfoVo">
+        <result column="username" property="username"></result>
+        <result column="phone_number" property="phoneNumber"></result>
+        <collection property="permissionList" javaType="java.util.List" ofType="com.model.entity.SysPermission">
+            <result column="id" property="id"></result>
+            <result column="pid" property="pid"></result>
+            <result column="name" property="name"></result>
+            <result column="permission_key" property="permissionKey"></result>
+            <result column="level" property="level"></result>
+            <result column="sort" property="sort"></result>
+            <result column="status" property="status"></result>
+        </collection>
+    </resultMap>
+
+    <!--根据用户名查询用户-->
+    <select id="loadUserByUsername" resultMap="usermap">
+         SELECT u.*,r.key FROM sys_user u
+         LEFT JOIN user_role ur
+         ON u.`id` = ur.`user_id`
+         LEFT JOIN sys_role r
+         ON ur.`role_id` = r.id
+         WHERE u.`username` = #{username}
+    </select>
+
+    <select id="getUserInfo" resultMap="userInfo">
+        SELECT username, phone_number,p.* FROM sys_user u
+        LEFT JOIN user_role ur
+        ON u.id = ur.user_id
+        LEFT JOIN sys_role r
+        ON ur.role_id = r.id
+        LEFT JOIN sys_role_permission rp
+        ON r.id = rp.role_id
+        LEFT JOIN sys_permission p
+        ON rp.permission_id = p.id
+        WHERE u.username = #{username}
+    </select>
+
+
+
+
+</mapper>

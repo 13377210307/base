@@ -1,0 +1,15 @@
+server:
+  port: 9004
+spring:
+  application:
+    name: netty
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+netty:
+  host: 192.168.3.26
+  port: 9005
