@@ -56,5 +56,30 @@ public class SmsCodeServiceImpl implements SmsCodeService {
         }
     }
 
+    /**
+     * 一天三次验证次数
+     */
+    @Override
+    public String codeCout(String phone, String code) {
 
+        String count = "code_count_"+phone;
+
+        // 未发送验证码
+        boolean result = this.redisUtil.hasKey(count);
+
+        // 获取验证码次数
+        Integer codeCount = (Integer)this.redisUtil.get(count);
+        if (!result) {
+           // 设置有效时间未一天且值为1
+           this.redisUtil.set(count,"1",24*60*60);
+           return "验证成功";
+        }else if (codeCount <= 2) {
+            // 值加1
+            this.redisUtil.incr(count,1);
+            return "验证成功";
+        }else {
+            // 第三次
+            return "验证次数过多";
+        }
+    }
 }
