@@ -9,9 +9,9 @@
         <module name="user" />
         <module name="gateway" />
         <module name="netty" />
-        <module name="model" />
-        <module name="oauth" />
         <module name="system" />
+        <module name="oauth" />
+        <module name="model" />
         <module name="elasticsearch" />
       </profile>
     </annotationProcessing>
