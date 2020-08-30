@@ -10,6 +10,8 @@ import java.util.List;
 @Data
 public class UserInfoVo implements Serializable {
 
+    private String userId;
+
     private String username;
 
     private String phoneNumber;

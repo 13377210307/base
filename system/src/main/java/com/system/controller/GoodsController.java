@@ -4,13 +4,17 @@ import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.excel.write.metadata.fill.FillConfig;
+import com.baomidou.mybatisplus.extension.api.R;
 import com.model.entity.SysGoods;
+import com.system.listener.FileListener;
 import com.system.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -28,8 +32,14 @@ public class GoodsController {
 
     // 导入
     @PostMapping("/import")
-    public void importFile() {
+    public R importFile(MultipartFile file) throws IOException {
+        FileListener fileListener = new FileListener(goodsService);
+        if (file == null) {
+            return R.failed("导入文件为空");
+        }
 
+        EasyExcel.read(file.getInputStream(),SysGoods.class,fileListener).sheet().headRowNumber(4).doRead();
+        return R.ok("导入成功");
     }
 
     // 导出

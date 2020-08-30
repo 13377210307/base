@@ -9,6 +9,7 @@
         <module name="user" />
         <module name="gateway" />
         <module name="netty" />
+        <module name="common" />
         <module name="system" />
         <module name="oauth" />
         <module name="model" />
@@ -19,6 +20,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="base" options="-parameters" />
+      <module name="common" options="-parameters" />
       <module name="elasticsearch" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="model" options="-parameters" />
