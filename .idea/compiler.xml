@@ -13,6 +13,7 @@
         <module name="system" />
         <module name="oauth" />
         <module name="model" />
+        <module name="seckill" />
         <module name="elasticsearch" />
       </profile>
     </annotationProcessing>
@@ -26,6 +27,7 @@
       <module name="model" options="-parameters" />
       <module name="netty" options="-parameters" />
       <module name="oauth" options="-parameters" />
+      <module name="seckill" options="-parameters" />
       <module name="system" options="-parameters" />
       <module name="user" options="-parameters" />
     </option>

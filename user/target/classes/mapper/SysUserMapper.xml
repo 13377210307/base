@@ -12,6 +12,7 @@
     </resultMap>
 
     <resultMap id="userInfo" type="com.user.vo.UserInfoVo">
+        <result column="id" property="userId"></result>
         <result column="username" property="username"></result>
         <result column="phone_number" property="phoneNumber"></result>
         <collection property="permissionList" javaType="java.util.List" ofType="com.model.entity.SysPermission">
@@ -36,7 +37,7 @@
     </select>
 
     <select id="getUserInfo" resultMap="userInfo">
-        SELECT username, phone_number,p.* FROM sys_user u
+        SELECT u.id, u.username, u.phone_number,p.* FROM sys_user u
         LEFT JOIN user_role ur
         ON u.id = ur.user_id
         LEFT JOIN sys_role r

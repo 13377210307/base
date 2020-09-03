@@ -17,6 +17,7 @@
         <module>elasticsearch</module>
         <module>system</module>
         <module>common</module>
+        <module>seckill</module>
     </modules>
 
     <parent>
